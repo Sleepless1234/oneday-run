@@ -1,0 +1,46 @@
+{
+  "$schema": "https://developers.reddit.com/schema/config-file.v1.json",
+  "menu": {
+    "items": [
+      {
+        "description": "Create today's One Run daily game post",
+        "endpoint": "/internal/menu/post-create",
+        "forUserType": "moderator",
+        "label": "Post today's dungeon",
+        "location": "subreddit"
+      }
+    ]
+  },
+  "name": "oneday-run",
+  "post": {
+    "dir": "dist/client",
+    "entrypoints": {
+      "default": {
+        "entry": "splash.html",
+        "inline": true
+      },
+      "game": {
+        "entry": "game.html"
+      }
+    }
+  },
+  "scheduler": {
+    "tasks": {
+      "daily-post": {
+        "cron": "5 0 * * *",
+        "endpoint": "/internal/scheduler/daily-post"
+      }
+    }
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch"
+  },
+  "server": {
+    "dir": "dist/server",
+    "entry": "index.cjs"
+  },
+  "triggers": {
+    "onAppInstall": "/internal/triggers/on-app-install"
+  }
+}
